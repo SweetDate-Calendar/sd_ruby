@@ -19,46 +19,16 @@ class PaddleClubsController < ApplicationController
   def edit
   end
 
-  # POST /paddle_clubs or /paddle_clubs.json
-  # def create
-  #   @paddle_club = PaddleClub.new(paddle_club_params)
-
-  #   respond_to do |format|
-  #     if @paddle_club.save
-  #       format.html { redirect_to @paddle_club, notice: "Paddle club was successfully created." }
-  #       format.json { render :show, status: :created, location: @paddle_club }
-  #     else
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @paddle_club.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
   def create
-    # Step 1: Build (but don't save) the PaddleClub
     @paddle_club = PaddleClub.new(paddle_club_params)
 
-    # Step 2: Validate it first
-    if @paddle_club.valid?
-      # Step 3: Attempt to create the SweetDate tier
-      ap @paddle_club
-      result = SweetDate.create_tier(@paddle_club.name )
-      ap result
-
-      if result["status"] == "ok"
-        @paddle_club.tier_id = result["id"] || result["message"] # adjust based on your response
-      else
-        @paddle_club.errors.add(:tier_id, "could not be created in SweetDate: #{result["message"]}")
-      end
-    end
-
-    # Step 4: Save if valid, or re-render with errors
     respond_to do |format|
-      if @paddle_club.errors.any? || !@paddle_club.save
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @paddle_club.errors, status: :unprocessable_entity }
-      else
+      if @paddle_club.save
         format.html { redirect_to @paddle_club, notice: "Paddle club was successfully created." }
         format.json { render :show, status: :created, location: @paddle_club }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @paddle_club.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -94,6 +64,6 @@ class PaddleClubsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def paddle_club_params
-      params.expect(paddle_club: [ :name, :tier_id ])
+      params.expect(paddle_club: [:membership_price, :name])
     end
 end

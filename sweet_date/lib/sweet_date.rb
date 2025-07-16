@@ -3,6 +3,7 @@ require_relative "sweet_date/authorize"
 require_relative "sweet_date/api"
 require_relative "sweet_date/ping"
 require_relative "sweet_date/tier"
+require_relative "sweet_date/tiers"
 
 module SweetDate
   class Error < StandardError; end

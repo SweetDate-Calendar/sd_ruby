@@ -19,8 +19,8 @@ module SweetDate
       puts response
 
       parsed = JSON.parse(response)
-      parsed = JSON.parse(parsed) if parsed.is_a?(String)
-
+      parsed.is_a?(String) ? JSON.parse(parsed) : parsed
+      
     rescue => e
       { "status" => "error", "message" => e.message }
     end

@@ -17,6 +17,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_16_082840) do
   create_table "paddle_clubs", force: :cascade do |t|
     t.string "name"
     t.string "tier_id"
+    t.string "membership_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
