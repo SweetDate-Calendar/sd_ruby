@@ -18,6 +18,8 @@ module SweetDate
     def api = @api ||= API.new
     def ping = Ping.call
     def list_tiers = Tier.list
+    def get_tier(id) = Tier.get(id)
+    def create_tier(name) = Tier.create(name)
   end
 
   class Configuration

@@ -16,11 +16,11 @@ module SweetDate
 
       response = socket.gets&.strip
       socket.close
+      puts response
 
       parsed = JSON.parse(response)
       parsed = JSON.parse(parsed) if parsed.is_a?(String)
 
-      parsed["message"]
     rescue => e
       { "status" => "error", "message" => e.message }
     end

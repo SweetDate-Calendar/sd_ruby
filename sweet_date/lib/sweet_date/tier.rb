@@ -5,8 +5,27 @@ module SweetDate
       SweetDate.api.call("TIERS.LIST", payload)
     end
     
-    def self.get(params)
-      # TODO: implement TIERS.GET
+
+    # Retrieves a specific tier from the SweetDate TCP server.
+    # 
+    # Example:
+    #   SweetDate.get_tier("3157f986-e888-4f76-9867-d40e1c49a625")
+    #
+    # Returns the parsed response from the server, or an error hash.
+    def self.get(id)
+      payload = Authorize.payload({"id" => id})
+      SweetDate.api.call("TIERS.GET", payload)
+    end
+
+    # Create a tier on the SweetDate TCP server 
+    #
+    # Example:
+    #   SweetDate.create_tier("brand new tier")
+    #
+    # Returns the parsed response from the server, or an error hash.
+    def self.create(name)
+      payload = Authorize.payload({"name" => name})
+      SweetDate.api.call("TIERS.CREATE", payload) 
     end
     
     def self.update(params)

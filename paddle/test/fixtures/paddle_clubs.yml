@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  tier_id: 1
+  tier_id: MyString
 
 two:
   name: MyString
-  tier_id: 1
+  tier_id: MyString

@@ -1,0 +1,2 @@
+module PaddleClubsHelper
+end
