@@ -1,0 +1,2 @@
+class PaddleClub < ApplicationRecord
+end

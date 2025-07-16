@@ -1,0 +1,26 @@
+require_relative "sweet_date/version"
+require_relative "sweet_date/authorize"
+require_relative "sweet_date/api"
+require_relative "sweet_date/ping"
+require_relative "sweet_date/tier"
+
+module SweetDate
+  class Error < StandardError; end
+
+  class << self
+    attr_accessor :config
+
+    def configure
+      self.config ||= Configuration.new
+      yield(config)
+    end
+
+    def api = @api ||= API.new
+    def ping = Ping.call
+    def list_tiers = Tier.list
+  end
+
+  class Configuration
+    attr_accessor :api_key_id, :api_secret, :host, :port
+  end
+end
